@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author lshyro
+ * @author Juan Luis Lazaro Lopez, Jose Antonio Lopez Ambrosio
  */
 @Named(value = "adLibros")
 @SessionScoped
