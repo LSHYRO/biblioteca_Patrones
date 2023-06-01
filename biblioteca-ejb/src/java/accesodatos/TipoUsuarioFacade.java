@@ -11,7 +11,7 @@ import modelo.TipoUsuario;
 
 /**
  *
- * @author lshyro
+ * @author yeste
  */
 @Stateless
 public class TipoUsuarioFacade extends AbstractFacade<TipoUsuario> {

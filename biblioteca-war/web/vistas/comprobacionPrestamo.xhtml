@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../plantilla/general.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="left">
+        left
+    </ui:define>
+
+    <ui:define name="right">
+        right
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+
+
+            <h:form>
+                <h1><p:outputLabel value="Lista de libros"/></h1>
+                <p:dataTable value="#{adPrestamos.carrito}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idlibro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.idlibro}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del libro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.titulo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Autor"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.autor}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad Existente"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.cantidad}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <h1><p:outputLabel value="Ingrese los siguientes datos para realizar el prestamo"/></h1>
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Fecha de entrega(dd/mm/aaaa): " for="fechaEntrega"/>
+                    <p:inputText value="#{adPrestamos.prestamo.fechaFinal}" id="fechaEntrega" title="Ingrese fecha de entrega" required="true" requiredMessage="Falta fecha" validator="#{adPrestamos.validar_fecha}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputText>
+                    <p:message for="fechaEntrega"/>
+                    <p:outputLabel value="Num. Control: " for="estudiante"/>
+                    <p:inputText value="#{adPrestamos.estudiante.nocontrol}" id="estudiante" required="true" requiredMessage="Ingresar le numero de control del estudiante" validator="#{adPrestamos.validar_estudiante}" />
+                    <p:message for="estudiante"/>
+                </p:panelGrid>
+                
+                <p:commandButton ajax="false" value="Registrar Prestamo" actionListener="#{adPrestamos.añadirPrestamoLibro()}" />
+                <p:outputLabel value="${adPrestamos.mensaje}" style="color:blue"/>
+            </h:form>
+            <h:form>
+                <p:commandButton ajax="false" value="Cancelar Prestamo" action="Prestamos" actionListener="#{adPrestamos.clear()}" />
+                <p:outputLabel />
+            </h:form>
+        </f:view>
+    </ui:define>
+
+    <ui:define name="bottom">
+        <p:messages style="color: red"/>
+    </ui:define>
+
+</ui:composition>

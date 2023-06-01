@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../plantilla/general.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="left">
+        left
+    </ui:define>
+
+    <ui:define name="right">
+        right
+    </ui:define>
+
+    <ui:define name="content">
+        <f:view>
+
+
+            <h:form>
+                <h1><p:outputLabel value="Libros a prestar"/></h1>
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Libro:" for="idlibro" />
+                    <p:selectOneMenu id="idlibro" value="#{adPrestamos.libro.idlibro}">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{adPrestamos.libros}" var="libro" itemLabel="#{libro.titulo}" itemValue="#{libro.idlibro}"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton ajax="false" value="Agregar" action="Prestamos" actionListener="#{adPrestamos.añadirLista()}"/>
+                <br></br>
+                <h1><p:outputLabel value="${adPrestamos.mensaje}" style="color:rgb(65, 104, 237)"/></h1>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <h1><p:outputLabel value="Lista de libros"/></h1>
+                <p:dataTable value="#{adPrestamos.carrito}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idlibro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.idlibro}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del libro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.titulo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Autor"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.autor}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad Existente"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.cantidad}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <h:form>
+                <p:selectOneMenu id="eliminar" value="#{adPrestamos.idEliminar}">
+                    <f:selectItems value="#{adPrestamos.carrito}" var="preslib" itemLabel="${preslib.idlibro.idlibro}" itemValue="${preslib.idlibro.idlibro}"/>
+                </p:selectOneMenu>
+                <br></br>
+                <p:commandButton ajax="false" value="Eliminar" actionListener="#{adPrestamos.eliminarLista()}"/>
+                <br></br>
+
+                <br></br>
+                <p:commandButton ajax="false" value="Continuar prestamo" action="${adPrestamos.getPagina}" actionListener="#{adPrestamos.changePage()}"/>
+            </h:form>
+        </f:view>
+
+    </ui:define>
+
+    <ui:define name="bottom">
+
+        <p:messages style="color: red"/>
+        <h:form>
+            <h1><p:outputLabel value="${adPrestamos.getMsj()}" style="color: red"/></h1>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

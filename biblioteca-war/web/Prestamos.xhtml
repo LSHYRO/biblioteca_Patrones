@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Prestamo de libros</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Libros a prestar"/></h1>
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Libro:" for="idlibro" />
+                    <h:selectOneMenu id="idlibro" value="#{adPrestamos.libro.idlibro}" title="Idlibro">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{adPrestamos.libros}" var="libro" itemLabel="#{libro.titulo}" itemValue="#{libro.idlibro}"/>
+                    </h:selectOneMenu>
+                    <h:message for="idlibro" errorStyle="color:red" infoStyle="color:blue" warnStyle="color:yellow"/>
+                </h:panelGrid>
+                <h:commandButton value="Agregar" actionListener="#{adPrestamos.añadirLista()}"/>
+                <h:outputLabel value="${adPrestamos.mensaje}" style="color:blue"/>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Lista de libros"/></h1>
+                <h:dataTable value="#{adPrestamos.carrito}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idlibro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.idlibro}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del libro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.titulo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Autor"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.autor}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad Existente"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.cantidad}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="Realizar prestamo" action="#{adPrestamos.getPagina}" actionListener="#{adPrestamos.changePage()}"/>
+            </h:form>
+            <h:form>
+                <h:selectOneListbox id="eliminar" value="#{adPrestamos.idEliminar}" title="producto" size="1">
+                    <f:selectItems value="#{adPrestamos.carrito}" var="preslib" itemLabel="${preslib.idlibro.idlibro}" itemValue="${preslib.idlibro.idlibro}"/>
+                </h:selectOneListbox>
+                <h:commandButton value="Eliminar" actionListener="#{adPrestamos.eliminarLista()}"/>
+                <br></br>
+                <h:outputLabel style="color: red">${adPrestamos.msj}</h:outputLabel>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>

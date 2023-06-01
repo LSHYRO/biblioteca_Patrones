@@ -5,9 +5,11 @@
 package logicaneg;
 
 import accesodatos.UsuarioFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Usuario;
 
 /**
  *
@@ -20,6 +22,9 @@ public class LnUsuarios {
     @EJB
     private UsuarioFacade usuarioFacade;
 
+    public List<Usuario> findUsuarios(){
+        return usuarioFacade.findAll();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     

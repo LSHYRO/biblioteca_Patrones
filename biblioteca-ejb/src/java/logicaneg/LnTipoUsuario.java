@@ -4,32 +4,27 @@
  */
 package logicaneg;
 
-import accesodatos.PrestamosFacade;
+import accesodatos.TipoUsuarioFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
-import modelo.Prestamos;
+import modelo.TipoUsuario;
 
 /**
  *
- * @author lshyro
+ * @author yeste
  */
 @Stateless
 @LocalBean
-public class LnPrestamos {
+public class LnTipoUsuario {
 
     @EJB
-    private PrestamosFacade prestamosFacade;
+    private TipoUsuarioFacade tipoUsuarioFacade;
 
+    public List<TipoUsuario> findTiposUsuarios(){
+        return tipoUsuarioFacade.findAll();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
-    public void addPrestamo(Prestamos p){
-        prestamosFacade.create(p);
-    }
-    
-    public List<Prestamos> findPrestamos(){
-        return prestamosFacade.findAll();
-    }
 }

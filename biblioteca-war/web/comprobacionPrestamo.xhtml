@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Comprobacion Prestamo</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Lista de libros"/></h1>
+                <h:dataTable value="#{adPrestamos.carrito}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idlibro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.idlibro}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del libro"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.titulo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Autor"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.autor}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad Existente"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idlibro.cantidad}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+        <f:view>
+
+
+            <h:form>
+                <!--h1><h:outputText value="Create/Edit"/></h1-->
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Fecha de entrega(dd/mm/aaaa): " for="fechaEntrega"/>
+                    <h:inputText value="#{adPrestamos.prestamo.fechaFinal}" id="fechaEntrega" title="Ingrese fecha de entrega" required="true" requiredMessage="Falta fecha" validator="#{adPrestamos.validar_fecha}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:inputText>
+                    <h:message for="fechaEntrega" errorStyle="color:red" infoStyle="color:blue" warnStyle="color:yellow"/>
+                    <h:outputLabel value="Num. Control: " for="estudiante"/>
+                    <h:inputText value="#{adPrestamos.estudiante.nocontrol}" id="estudiante" required="true" requiredMessage="Ingresar le numero de control del estudiante" validator="#{adPrestamos.validar_estudiante}" />
+                    <h:message for="estudiante" errorStyle="color:red" infoStyle="color:blue" warnStyle="color:yellow"/>
+                </h:panelGrid>
+                
+                <h:commandButton value="Registrar Prestamo" actionListener="#{adPrestamos.añadirPrestamoLibro()}" />
+                <h:outputLabel value="${adPrestamos.mensaje}" style="color:blue"/>
+            </h:form>
+            <h:form>
+                <h:commandButton value="Cancelar Prestamo" action="Prestamos" actionListener="#{adPrestamos.clear()}" />
+                <h:outputLabel />
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

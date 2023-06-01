@@ -11,7 +11,7 @@ import modelo.Edicion;
 
 /**
  *
- * @author lshyro
+ * @author yeste
  */
 @Stateless
 public class EdicionFacade extends AbstractFacade<Edicion> {

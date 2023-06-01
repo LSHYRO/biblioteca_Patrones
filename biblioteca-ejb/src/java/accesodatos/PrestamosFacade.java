@@ -11,7 +11,7 @@ import modelo.Prestamos;
 
 /**
  *
- * @author lshyro
+ * @author yeste
  */
 @Stateless
 public class PrestamosFacade extends AbstractFacade<Prestamos> {

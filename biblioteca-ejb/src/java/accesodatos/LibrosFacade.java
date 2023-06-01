@@ -11,7 +11,7 @@ import modelo.Libros;
 
 /**
  *
- * @author lshyro
+ * @author yeste
  */
 @Stateless
 public class LibrosFacade extends AbstractFacade<Libros> {
