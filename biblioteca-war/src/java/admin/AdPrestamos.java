@@ -256,6 +256,7 @@ public class AdPrestamos implements Serializable {
         System.out.println("Prestamo: " + prestamo.getFechaInicio() + " " + prestamo.getFechaFinal() + " " + prestamo.getIdprestamo() + " " + prestamo.getIdusuario() + " " + prestamo.getNocontrol() + " " + prestamo.getTotalLibro());
         Date fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
         prestamo.setFechaInicio(fecha);
+        
         System.out.println("Prestamo: " + prestamo.getFechaInicio() + " " + prestamo.getFechaFinal() + " " + prestamo.getIdprestamo() + " " + prestamo.getIdusuario() + " " + prestamo.getNocontrol() + " " + prestamo.getTotalLibro());
         prestamo.setTotalLibro(carrito.size());
         System.out.println("Prestamo: " + prestamo.getFechaInicio() + " " + prestamo.getFechaFinal() + " " + prestamo.getIdprestamo() + " " + prestamo.getIdusuario() + " " + prestamo.getNocontrol() + " " + prestamo.getTotalLibro());
